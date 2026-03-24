@@ -1,25 +1,25 @@
-import React from 'react'
-import { useAppContext,setUser } from '../Context/AppContext';
+import React, { useEffect } from 'react'
+import { useAppContext} from '../Context/AppContext';
 
 export default function Login() {
-    const {setShowUserLogin}= useAppContext();
+    const {setShowUserLogin,setUser,user }= useAppContext();
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
+   
     const onSubmitHandler= async (event)=>{
         event.preventDefault();
         setUser({
             email:'bbb@gmail.com',
             name:'A lét san đơ'
-            
         }) 
         setShowUserLogin(false);    
     };
   return (
     <div onClick={()=>{setShowUserLogin(false)}} className='fixed top-0 left-0 right-0 bottom-0 z-30 flex items-center text-sm text-emerald-400 bg-green-950/70 '>
-        <form onSubmit={onSubmitHandler()} onClick={(e) => e.stopPropagation()} className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] text-gray-500 rounded-lg shadow-xl border border-gray-200 bg-white">
+        <form onSubmit={onSubmitHandler} onClick={(e) => e.stopPropagation() } className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] text-gray-500 rounded-lg shadow-xl border border-gray-200 bg-white">
             <p className="text-2xl font-medium m-auto">
                 <span className="text-indigo-500">User</span> {state === "login" ? "Login" : "Sign Up"}
             </p>
@@ -46,7 +46,7 @@ export default function Login() {
                     Create an account? <span onClick={() => setState("register")} className="text-indigo-500 cursor-pointer">click here</span>
                 </p>
             )}
-            <button className="bg-indigo-500 hover:bg-indigo-600 transition-all text-white w-full py-2 rounded-md cursor-pointer">
+            <button type='submit' className="bg-indigo-500 hover:bg-indigo-600 transition-all text-white w-full py-2 rounded-md cursor-pointer">
                 {state === "register" ? "Create Account" : "Login"}
             </button>
         </form>

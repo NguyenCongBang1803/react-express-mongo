@@ -8,11 +8,12 @@ export default function AppContextProvider({ children }) {
    
    const currency =import.meta.env.VITE_CURRENCY;
    
-    const [user, setUser] = useState(false)
+    const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [searchQuery, setSearchQuery] = useState({});
     const navigate = useNavigate();
     const fetchProducts = async ()=>{
         setProducts(dummyProducts);
@@ -24,7 +25,7 @@ export default function AppContextProvider({ children }) {
     
 
     // Add to cart 
-    const addToCart=(itemId)=>{
+    const addToCard=(itemId)=>{
         let cartData = structuredClone(cartItems)
         if(cartData[itemId]){
             cartData[itemId]+=1;
@@ -58,7 +59,7 @@ export default function AppContextProvider({ children }) {
     }
     
     const value = {
-        user, setUser, isSeller, setIsSeller,showUserLogin, setShowUserLogin, navigate,products,setProducts,addToCart,updateCartItems,removeFromCart,cartItems
+        user, setUser, isSeller, setIsSeller,showUserLogin, setShowUserLogin, navigate,products,setProducts,addToCard,updateCartItems,removeFromCart,cartItems,searchQuery,setSearchQuery,currency
     }
 
     return (
